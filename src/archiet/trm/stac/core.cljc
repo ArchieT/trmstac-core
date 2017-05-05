@@ -2,6 +2,7 @@
   (:require [schema.core :as sh]
             #?(:clj [clojure.spec :as s]
                :cljs [cljs.spec :as s])
+            #?(:cljs [cljs.reader :refer [read-string]])
             [clojure.set :as set]))
 
 (def counts-locations-regex

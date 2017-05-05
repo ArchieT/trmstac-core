@@ -5,6 +5,11 @@
                  [org.clojure/clojurescript "1.9.494"]
                  [prismatic/schema "1.1.5"]
                  [org.clojure/test.check "0.9.0"]]
+  :plugins [[lein-cljsbuild "1.1.5"]
+            [lein-figwheel "0.5.9"]
+            [lein-bikeshed "0.2.0"]
+            [lein-cljfmt "0.5.6"]
+            [lein-kibit "0.1.3"]]
   :profiles {:dev {:dependencies [[clj-http "3.5.0"]]}
              :test {:dependencies [[clj-http "3.5.0"]]}}
   :cljbuild
