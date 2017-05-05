@@ -6,7 +6,7 @@
             [clojure.set :as set]))
 
 (def counts-locations-regex
-  #"Stacja nr ? (\d{1,2}) ? ? ? ? ?</br> ? ? ? ? ? ?Dostępne rowery: (\d{1,2}) ? ? ? ?</br> ? ? ? ?Wolne sloty (\d{1,2}) ', (\d+\.\d+) , (\d+\.\d+) , 'http")
+  #"Stacja nr ? (\d{1,2}) ? ? ? ? ?<\/br> ? ? ? ? ? ?Dostępne rowery: (\d{1,2}) ? ? ? ?<\/br> ? ? ? ?Wolne sloty (\d{1,2}) ', (\d+\.\d+) , (\d+\.\d+) , 'http")
 (defn counts-location-from-grouped-match [m]
   {:station-num (read-string (nth m 1))
    :available-bikes (read-string (nth m 2))
