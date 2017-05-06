@@ -5,8 +5,8 @@
             #?(:cljs [cljs.reader :refer [read-string]])
             [clojure.set :as set]))
 
-(def counts-locations-regex
-  #"Stacja nr ? (\d{1,2}) ? ? ? ? ?<\/br> ? ? ? ? ? ?Dostępne rowery: (\d{1,2}) ? ? ? ?<\/br> ? ? ? ?Wolne sloty (\d{1,2}) ', (\d+\.\d+) , (\d+\.\d+) , 'http")
+(defonce counts-locations-regex
+  #"Stacja nr ? (\d{1,2}) {0,5}<.br> {0,6}Dostępne rowery: (\d{1,2}) {0,4}<.br> {0,4}Wolne sloty (\d{1,2}) \x27, (\d+\.\d+) , (\d+\.\d+) , 'http")
 (defn counts-location-from-grouped-match [m]
   {:station-num (read-string (nth m 1))
    :available-bikes (read-string (nth m 2))
@@ -27,7 +27,7 @@
 (s/def ::counts-location (s/keys :req-un [::station-num ::available-bikes ::free-slots ::station-location]))
 (s/fdef counts-locations :args string? :ret (s/coll-of ::counts-location))
 (def addresses-regex
-  #"google.maps.event.trigger.gmarkers\[(\d{1,2})\]..click.....<b> ? ? ? ?Stacja nr\. (\d{1,2})\. ([^\f\t\n\r\v\<\>]{4,}?) {0,5}?..b\> {0,8}?\<\/a\>")
+  #"google.maps.event.trigger.gmarkers\[(\d{1,2})\]..click.{5}<b> {0,4}Stacja nr\. (\d{1,2})\. ([^\f\t\n\r\v<>]{4,}?) {0,5}?..b> {0,8}?<.a>")
 (defn address-from-grouped-match [[_ from-zero from-one address]]
   (let [from-zero (read-string from-zero)
         from-one (read-string from-one)]
@@ -51,4 +51,4 @@
                        {:station-num ::addresses-station-num }))))
 (defn stations [s]
   (stations-merge (counts-locations s) (addresses s)))
-(def ^:dynamic url "http://trm24.pl/panel-trm/maps.jsp")
+(def ^:dynamic url "https://trm24.pl/panel-trm/maps.jsp")

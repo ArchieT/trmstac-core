@@ -1,4 +1,4 @@
-(defproject archiet.trm/stac_core "0.1.1-SNAPSHOT"
+(defproject archiet.trm/stac_core "0.1.2-SNAPSHOT"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.9.0-alpha15"]
